@@ -1,34 +1,41 @@
-(set-language-environment "UTF-8")
-
-;; custom
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
-;; melpa
-(require 'package)
-
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
-
-(package-initialize)
-
-;; display
-(load-theme 'spacemacs-dark t)
-
+;; Turn off mouse interface early in startup to avoid momentary display
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-;; typescript
-;;(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(setq inhibit-startup-screen t)
 
-;;(defun setup-tide-mode ()
-;;  (interactive)
-;;  (tide-setup)
-;;  (flycheck-mode +1)
-;;  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-;;  (eldoc-mode +1)
-;;  (tide-hl-identifier-mode +1)
-;;  (company-mode +1))
+(set-language-environment "UTF-8")
 
-;;(add-hook 'typescript-mode-hook #' setup-tide-mode)
+(add-to-list 'load-path "~/.emacs.d/core/")
+(add-to-list 'load-path "~/.emacs.d/modes/")
+
+;;; require
+(require 'package)
+
+;;; custom
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;;; package
+(setq package-enable-at-startup nil)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
+			 ("melpa-stable" . "https://stable.melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")))
+
+(package-initialize)
+
+(setq backup-directory-alist (list (cons "." "~/.emacs.d/backups/")))
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(load "~/.emacs.d/core/core-packages.el")
+
+(load "~/.emacs.d/modes/dart.el")
+(load "~/.emacs.d/modes/elisp.el")
+(load "~/.emacs.d/modes/rust.el")
+(load "~/.emacs.d/modes/typescript.el")
+
