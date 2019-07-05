@@ -34,8 +34,10 @@
 
 (load "~/.emacs.d/core/core-packages.el")
 
-(load "~/.emacs.d/modes/dart.el")
-(load "~/.emacs.d/modes/elisp.el")
-(load "~/.emacs.d/modes/rust.el")
-(load "~/.emacs.d/modes/typescript.el")
+(load "~/.emacs.d/core/modes/dart.el")
+(load "~/.emacs.d/core/modes/dockerfile.el")
+(load "~/.emacs.d/core/modes/elisp.el")
+(load "~/.emacs.d/core/modes/elixir.el")
+(load "~/.emacs.d/core/modes/rust.el")
+(load "~/.emacs.d/core/modes/typescript.el")
 
